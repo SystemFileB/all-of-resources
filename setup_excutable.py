@@ -10,7 +10,8 @@ build_exe_options = {
 # 定义可执行文件
 executables = [
     Executable(
-        "aor/__main__.py",  # 替换为你的主脚本文件名
+        "aor/__main__.py",
+        targetName="aor.exe",
         base="Win32GUI",  # 这将隐藏控制台窗口
     )
 ]
