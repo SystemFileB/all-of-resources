@@ -11,7 +11,7 @@ build_exe_options = {
 executables = [
     Executable(
         "aor/__main__.py",
-        targetName="aor.exe",
+        target_name="aor.exe",
         base="Win32GUI",  # 这将隐藏控制台窗口
     )
 ]
