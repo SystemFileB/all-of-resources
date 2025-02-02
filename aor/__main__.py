@@ -3,9 +3,11 @@ import tkinter as tk
 from tkinter import ttk,filedialog,messagebox as msg
 import os,zipfile
 import shutil as sh
-from threading import Thread,Semaphore
+from threading import Thread
 import time
 import json
+import webbrowser
+__version__ = "1.00"
 
 
 class AorUI:
@@ -19,7 +21,7 @@ class AorUI:
         self.center()
 
         self.root.resizable(False, False)
-        self.root.title("All Of Resources - Minecraft 资源提取器")
+        self.root.title("All Of Resources {} - Minecraft 资源提取器".format(__version__))
         self.mcdir_t = ttk.Label(self.root, name="mcdir_t")
         self.mcdir_t.configure(text='选择.minecraft目录: ')
         self.mcdir_t.place(anchor="nw", relx=0.0, rely=0.0, x=8, y=8)
@@ -175,28 +177,30 @@ class AorUI:
             f.close()
         assetIndexPath=os.path.join(self.minecraftdir.get(), "assets/indexes", version_json["assetIndex"]["id"] + ".json")
         if os.path.exists(jarPath) and os.path.exists(jsonPath) and os.path.exists(assetIndexPath):
-            step1="Step 1: 解压{}.jar\n".format(version)
-            self.content.configure(text=step1)
-            with zipfile.ZipFile(os.path.join(self.minecraftdir.get(), "versions", version, version + ".jar")) as jar:
-                files = [f for f in jar.namelist() if f.startswith("assets/") or f.startswith("data/")]
-                progress = 0
-                files_len = len(files)
-                self.content.configure(text=step1+"0% ({}/{})".format(progress, files_len))
-                for file in files:
-                    jar.extract(file, path)
-                    progress+=1
-                    self.prog.set((progress/files_len)*1000)
-                    self.content.configure(text=step1+"{}% ({}/{})".format(round((progress/files_len)*100), progress, files_len))
+            if os.path.exists(jarPath) and os.path.exists(jsonPath) and os.path.exists(assetIndexPath):
+                step1="Step 1: 解压{}.jar\n".format(version)
+                self.content.configure(text=step1)
+                with zipfile.ZipFile(os.path.join(self.minecraftdir.get(), "versions", version, version + ".jar")) as jar:
+                    files = [f for f in jar.namelist() if f.startswith("assets/") or f.startswith("data/")]
+                    progress = 0
+                    files_len = len(files)
+                    self.content.configure(text=step1+"0% ({}/{})".format(progress, files_len))
+                    for file in files:
+                        jar.extract(file, path)
+                        progress+=1
+                        self.prog.set((progress/files_len)*1000)
+                        self.content.configure(text=step1+"{}% ({}/{})".format(round((progress/files_len)*100), progress, files_len))
+                time.sleep(0.5)
+
+
             time.sleep(0.5)
-
-
             self.step2="Step 2: 根据 {} 复制文件\n".format(version_json["assetIndex"]["id"] + ".json")
+            cpu_count = os.cpu_count()
             self.content.configure(text=self.step2+"获取文件列表...")
             with open(assetIndexPath,"r",encoding="utf-8") as f:
                 self.assets_assetIndex_json = json.load(f)
                 f.close()
             assets = self.assets_assetIndex_json["objects"].keys()
-            cpu_count = os.cpu_count()
             assets_threads = []
             self.assets_length = len(assets)
             self.assets_count = 0
@@ -229,7 +233,7 @@ class AorUI:
         
 
         self.root.protocol("WM_DELETE_WINDOW", self.root.destroy)
-        self.start_b.configure(state="normal")
+        self.mcver_update()
 
     def advcopy(self,source_file, destination_file):
         # 获取目标文件的目录路径
@@ -249,14 +253,17 @@ class AorUI:
             self.assets_count+=1
             self.prog.set(1000+(self.assets_count/self.assets_length)*1000)
             self.content.configure(text="{}{}% ({}/{})".format(self.step2, round((self.assets_count/self.assets_length)*100), self.assets_count, self.assets_length))
+
     def donotclose(self,e=None):
         pass
 
 
     def about(self):
-        pass
+        if msg.askyesno("All Of Resources", "All Of Resources By SystemFileB\n给个Star awa\n\n是否进入项目的github？"):
+            webbrowser.open("https://github.com/SystemFileB/all-of-resources")
 
-
-if __name__ == "__main__":
+def main():
     app = AorUI()
     app.run()
+if __name__ == "__main__":
+    main()
