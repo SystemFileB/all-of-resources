@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.4" author="PygubuDesigner 0.40.1">
+  <project>
+    <settings>
+      <setting id="name">a</setting>
+      <setting id="description">y</setting>
+      <setting id="module_name">aor</setting>
+      <setting id="template">codescript</setting>
+      <setting id="main_widget">root</setting>
+      <setting id="main_classname">AorUI</setting>
+      <setting id="main_menu" />
+      <setting id="output_dir" />
+      <setting id="output_dir2" />
+      <setting id="import_tkvariables">False</setting>
+      <setting id="use_ttk_styledefinition_file">False</setting>
+      <setting id="use_i18n">False</setting>
+      <setting id="all_ids_attributes">False</setting>
+      <setting id="generate_code_onsave">False</setting>
+      <setting id="use_window_centering_code">True</setting>
+      <setting id="ttk_style_definition_file" />
+    </settings>
+    <customwidgets />
+  </project>
+  <object class="tk.Tk" id="root" named="True">
+    <property name="className">root</property>
+    <property name="geometry">413x200</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">All Of Resources - Minecraft 资源提取器</property>
+    <child>
+      <object class="tk.Label" id="mcdir_t" named="True">
+        <property name="text" translatable="yes">选择.minecraft目录: </property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="x">8</property>
+          <property name="y">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Entry" id="mcdir" named="True">
+        <property name="textvariable">string:minecraftdir</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">248</property>
+          <property name="x">124</property>
+          <property name="y">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="mcdir_browse" named="True">
+        <property name="command" type="command" cbtype="simple">select_minecraft</property>
+        <property name="text" translatable="yes">...</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">25</property>
+          <property name="x">376</property>
+          <property name="y">8</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="mcver_t" named="True">
+        <property name="text" translatable="yes">选择版本: </property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="x">8</property>
+          <property name="y">40</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Combobox" id="mcver" named="True">
+        <property name="textvariable">string:mcversion</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">277</property>
+          <property name="x">124</property>
+          <property name="y">40</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Label" id="extract_t" named="True">
+        <property name="text" translatable="yes">解压路径: </property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="x">8</property>
+          <property name="y">70</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Entry" id="extract" named="True">
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">248</property>
+          <property name="x">124</property>
+          <property name="y">70</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="extract_browse" named="True">
+        <property name="command" type="command" cbtype="simple">select_extract</property>
+        <property name="text" translatable="yes">...</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">25</property>
+          <property name="x">376</property>
+          <property name="y">70</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Progressbar" id="progress" named="True">
+        <property name="orient">horizontal</property>
+        <property name="variable">int:prog</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="relheight">0.0</property>
+          <property name="relwidth">0.0</property>
+          <property name="relx">0.0</property>
+          <property name="rely">0.0</property>
+          <property name="width">281</property>
+          <property name="x">8</property>
+          <property name="y">168</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="label1">
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="x">8</property>
+          <property name="y">100</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="start_b" named="True">
+        <property name="command" type="command" cbtype="simple">start</property>
+        <property name="text" translatable="yes">开始</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="width">50</property>
+          <property name="x">355</property>
+          <property name="y">168</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="about_b" named="True">
+        <property name="command" type="command" cbtype="simple">about</property>
+        <property name="text" translatable="yes">关于</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">22</property>
+          <property name="width">50</property>
+          <property name="x">297</property>
+          <property name="y">168</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
