@@ -26,7 +26,7 @@ find = { where = ["."], include = ["aor"] }  # 注意 where 参数需要是数�
 aor = ["*.py", "*.png"]
 
 [tool.flet]
-org = "net.systemfileb.mobile.all-of-resources"
+org = "net.systemfileb.mobile"
 product = "All Of Resources"
 company = "SystemFileB"
 permissions = ["storage"]
