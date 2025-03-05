@@ -15,7 +15,7 @@ class AorUI:
         # build ui
         self.root = tk.Tk(master)
         self.root.geometry("413x200")
-        self.root.iconphoto(True,tk.PhotoImage(file=os.path.join(os.path.dirname(__file__), "icon.png")))
+        self.root.iconphoto(True,tk.PhotoImage(file=os.path.join(os.path.dirname(__file__), "assets", "icon.png")))
 
         self.main_w = self.root.winfo_reqwidth()
         self.main_h = self.root.winfo_reqheight()

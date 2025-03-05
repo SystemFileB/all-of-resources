@@ -31,7 +31,7 @@ def page(page: ft.Page):
            content=ft.Container(  # 添加尺寸限制容器
                content=ft.Column([
                    ft.Row([
-                       ft.Image("icon.png",width=40, height=40),
+                       ft.Image("/icon.png",width=40, height=40),
                        ft.Text(f"All Of Resources {__version__}", size=20, weight=ft.FontWeight.BOLD)
                    ]),
                    ft.Markdown(aboutmsg)
@@ -155,8 +155,7 @@ def page(page: ft.Page):
 def main():
     ft.app(
         target=page,
-        assets_dir=".",
-        use_color_emoji=True,
+        use_color_emoji=True
     )
 
 if __name__=="__main__":

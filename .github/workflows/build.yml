@@ -66,7 +66,9 @@ jobs:
         name: aor-snapshot-windows
         path: build
 
-    - name: flet构建
+    - name: Flet构建
+      env:
+        PYTHONUTF8: 1
       run: |
         flet build windows
 
