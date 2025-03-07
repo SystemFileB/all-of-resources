@@ -111,7 +111,7 @@ def page(page: ft.Page):
         nonlocal pickTo
         # 给权限！
         check_status=premission.check_permission(fph.PermissionType.STORAGE)
-        if type(check_status) == fph.PermissionStatus and check_status.value == fph.PermissionStatus.DENIED and premission.open_app_settings(9999):
+        if type(check_status) == fph.PermissionStatus and check_status.value != fph.PermissionStatus.GRANTED and (not premission.open_app_settings()):
             return
         pickTo=ftype
         file_picker.get_directory_path(title)
