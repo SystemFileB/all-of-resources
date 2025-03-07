@@ -1,4 +1,5 @@
 import flet as ft
+import flet_permission_handler as fph
 try:
     from . import core
     from .version import version
@@ -7,20 +8,9 @@ except ImportError:
     from version import version
 
 __version__ = version
-aboutmsg="""这是一个可以从松散文件和client.jar提取Minecraft的原版资源包和数据包的工具  
-这个工具除了jar文件的内容以外，还提取了:
-- 音乐和音效文件
-- 完整的语言文件
-- Unifont的位图字体
-- 完整的全景图
-- Programmer Art和高对比度资源包
 
-觉得这个项目还不错，去Github给个Star没问题吧awa  
-或者在爱发电给一点小小的资金鼓励！
-
-如果你觉得这个UI不习惯的话，可以使用`aortk`回到以前的旧Tkinter UI
-
-请勿分发使用这个程序提取出来的资源，这些资源仅用作资源包的开发，我不会对此承担任何责任"""
+aboutmsg="""能给个Star吗，求求了😭  
+或者在爱发电给一点小小的资金支持！"""
 
 def page(page: ft.Page):
     # 关于窗口
@@ -32,17 +22,15 @@ def page(page: ft.Page):
                content=ft.Column([
                    ft.Row([
                        ft.Image("/icon.png",width=40, height=40),
-                       ft.Text(f"All Of Resources {__version__}", size=20, weight=ft.FontWeight.BOLD)
+                       ft.Markdown(f"**All Of Resources {__version__}**  \n[Github](https://github.com/SystemFileB/all-of-resources) | [爱发电](https://afdian.com/a/systemfileb)",on_tap_link=lambda e: page.launch_url(e.data))
                    ]),
-                   ft.Markdown(aboutmsg)
-               ], scroll=ft.ScrollMode.ALWAYS),  # 启用滚动条
-               width=600,  # 固定宽度
-               height=400  # 固定高度
+                   ft.Markdown(aboutmsg,on_tap_link=lambda e: page.launch_url(e.data)),
+               ], scroll=ft.ScrollMode.HIDDEN),
+               width=250,  # 固定宽度
+               height=100  # 固定高度
            ),
            on_dismiss=lambda e: page.close(dialog),
-           actions=[ft.TextButton("Github",on_click=lambda e: page.launch_url("https://github.com/SystemFileB/all-of-resources")),
-                    ft.TextButton("爱发电",on_click=lambda e: page.launch_url("https://afdian.com/a/systemfileb")),
-                    ft.TextButton("关闭", on_click=lambda e: page.close(dialog))]
+           actions=[ft.TextButton("关闭", on_click=lambda e: page.close(dialog))]
         )
         page.open(dialog)
     
@@ -61,6 +49,7 @@ def page(page: ft.Page):
         expand=True,
         alignment=ft.MainAxisAlignment.START),  # 设置对齐方式
     )
+    page.add(bar)
 
     # 检查是否信息收集完毕
     def check(e=None):
@@ -118,12 +107,21 @@ def page(page: ft.Page):
             outputdir_text.value=e.path
         check()
 
-    def filedialog(type,title):
+    def filedialog(ftype,title):
         nonlocal pickTo
-        pickTo=type
+        # 给权限！
+        check_status=premission.check_permission(fph.PermissionType.STORAGE)
+        if type(check_status) == fph.PermissionStatus and check_status == fph.PermissionStatus.DENIED and premission.request_permission(fph.PermissionType.STORAGE):
+            return
+        pickTo=ftype
         file_picker.get_directory_path(title)
     file_picker=ft.FilePicker(on_result=pick_dir_event)
+
+    # 我要权限！
+    premission=fph.PermissionHandler()
+
     page.overlay.append(file_picker)
+    page.overlay.append(premission)
 
     # 构建界面
     minecraftdir_text=ft.TextField(label=".minecraft目录位置", expand=1, on_change=check)  # 添加expand让输入框填充剩余空间
@@ -148,7 +146,7 @@ def page(page: ft.Page):
         on_click=task
     )
 
-    page.add(bar,minecraftdir,version_box,outputdir,progressbar,logtext,start_button)
+    page.add(minecraftdir,version_box,outputdir,progressbar,logtext,start_button)
 
 
 

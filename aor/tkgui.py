@@ -3,7 +3,10 @@ import tkinter as tk
 from tkinter import ttk,filedialog,messagebox as msg
 from threading import Thread
 import webbrowser
-from . import core
+try:
+    from . import core
+except ImportError:
+    import core
 import os
 
 from .__main__ import version
@@ -191,7 +194,7 @@ class AorUI:
 
 
     def about(self):
-        if msg.askyesno("All Of Resources", "All Of Resources By SystemFileB\n给个Star awa\n\n如果你使用了python -m aor -f或python -m aor --flutter来启动的话，你就可以试试手机端的体验 (或者更棒的UI)！\n\n是否进入项目的github？"):
+        if msg.askyesno("All Of Resources", "All Of Resources By SystemFileB\n给个Star awa\n\n如果你使用了python -m aor -f | python -m aor --flutter | aor来启动的话，你就可以试试手机端的体验 (或者更棒的UI)！\n\n是否进入项目的github？"):
             webbrowser.open("https://github.com/SystemFileB/all-of-resources")
 
 def main():

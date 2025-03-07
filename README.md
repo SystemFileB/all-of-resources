@@ -17,15 +17,22 @@
     ```
 
 2. 针对Windows的二进制文件
-   直接下载并解压Release的`all-of-resources_1.00_windows.7z`文件，然后运行`aor.exe`  
-   如果Windows版本太老，也可以使用`aortk.exe`的旧界面
+   直接下载并解压Release的`all-of-resources_1.00_windows.7z`文件，然后运行`aortk.exe`  
+   
+   谁知道怎么打包Flutter界面的aor.exe呀，我`flet build windows`打包不了，欢迎提交PR帮一下我！
 
 ## 🖼️ 截图
-tkinter前段：
-![](./screenshot1.png)
-![](./screenshot2.png)
+| ![](./screenshot1.png) | ![](./screenshot2.png) |
+| :--------------------: | :--------------------: |
+|       Tkinter界面      |       Flutter界面       |
 
 ## 📓 更新日志
+### 1.10.3
+⚡没有Bug，只有特性⚡
+- 修复了安卓11+用不了的问题，好奇怪呀
+- 缩短了关于文字
+- 移除了Herobrine
+
 ### 1.10.2
 - 不小心上传了1.10.1，然后没有放icon.png这个文件，这个版本修复
 
