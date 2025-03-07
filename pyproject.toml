@@ -39,12 +39,11 @@ dependencies = ["flet_permission_handler"]
 
 [tool.flet.android]
 split_per_abi = true
-request_legacy_external_storage = true
 
 [tool.flet.android.permission]
+"android.permission.MANAGE_EXTERNAL_STORAGE" = true
 "android.permission.WRITE_EXTERNAL_STORAGE" = true
 "android.permission.READ_EXTERNAL_STORAGE" = true
-"android.permission.MANAGE_EXTERNAL_STORAGE" = true
 
 [tool.flet.splash]
 color = "#FFFF00" # --splash-color
