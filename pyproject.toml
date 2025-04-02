@@ -8,7 +8,7 @@ version = "1.10.4"
 description = "可以通过client.jar和.minecraft/assets下的松散文件提取Minecrafft的所有资源"
 authors = [{name = "SystemFileB"}]
 readme = "README.md"
-dependencies = ["flet>=0.27.0","flet-permission-handler"]
+dependencies = ["flet>=0.27.6","flet-permission-handler"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)", 
